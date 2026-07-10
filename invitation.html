@@ -56,7 +56,7 @@
 
   /* MESSAGE */
   .message-section { text-align: center; border-top: 1px solid #ece3e5; }
-  .message-section p { font-family: 'Noto Serif KR', serif; font-size: 18px; line-height: 1.95; color: var(--text-light); letter-spacing: 0.3px; word-break: keep-all; }
+  .message-section p { font-size: 18px; line-height: 1.95; color: var(--text-light); letter-spacing: 0.3px; word-break: keep-all; }
   .message-section .highlight { font-size: 21px; color: var(--text); font-weight: 400; margin-bottom: 20px; display: block; }
 
   /* GALLERY */
@@ -78,7 +78,7 @@
   /* FOOTER */
   footer { text-align: center; padding: 48px 28px 60px; border-top: 1px solid #ece3e5; }
   footer .footer-names { font-family: 'Hakgyoansim', 'Noto Serif KR', serif; font-size: 22px; font-style: italic; color: var(--dusty-rose); margin-bottom: 12px; }
-  footer p { font-family: 'Noto Serif KR', serif; font-size: 13px; color: #b8a2a7; letter-spacing: 2px; text-transform: uppercase; }  /* ANIMATIONS */
+  footer p { font-size: 13px; color: #b8a2a7; letter-spacing: 2px; text-transform: uppercase; }  /* ANIMATIONS */
   @keyframes riseUp { from { opacity: 0; transform: translateY(30px) } to { opacity: 1; transform: translateY(0) } }
   @keyframes walkInLeftBob {
     0%   { transform: translate(-230px, 0); }
@@ -201,11 +201,14 @@
   <p class="section-label">Gallery</p>
   <div class="slider-wrap" id="slider">
     <div class="slides" id="slides">
-      <div class="slide"><div class="photo-placeholder"><span class="icon">🌸</span><span>Gallery 1</span></div></div>
-      <div class="slide"><div class="photo-placeholder"><span class="icon">🌿</span><span>Gallery 2</span></div></div>
-      <div class="slide"><div class="photo-placeholder"><span class="icon">🌷</span><span>Gallery 3</span></div></div>
-      <div class="slide"><div class="photo-placeholder"><span class="icon">🍃</span><span>Gallery 4</span></div></div>
-      <div class="slide"><div class="photo-placeholder"><span class="icon">🌸</span><span>Gallery 5</span></div></div>
+      <div class="slide"><img src="image/1.png" alt="Gallery 1" loading="lazy"></div>
+      <div class="slide"><img src="image/2.png" alt="Gallery 2" loading="lazy"></div>
+      <div class="slide"><img src="image/3.png" alt="Gallery 3" loading="lazy"></div>
+      <div class="slide"><img src="image/4.png" alt="Gallery 4" loading="lazy"></div>
+      <div class="slide"><img src="image/5.png" alt="Gallery 5" loading="lazy"></div>
+      <div class="slide"><img src="image/6.png" alt="Gallery 6" loading="lazy"></div>
+      <div class="slide"><img src="image/7.png" alt="Gallery 7" loading="lazy"></div>
+      <div class="slide"><img src="image/8.png" alt="Gallery 8" loading="lazy"></div>
     </div>
     <button class="slider-btn prev" onclick="moveSlide(-1)">&#8249;</button>
     <button class="slider-btn next" onclick="moveSlide(1)">&#8250;</button>
@@ -318,7 +321,7 @@
   document.addEventListener('dragstart', e => e.preventDefault());
 
   let cur = 0;
-  const total = 5;
+  const total = 8;
   const slidesEl = document.getElementById('slides');
   const dotsWrap = document.getElementById('dots');
   for (let i = 0; i < total; i++) {
