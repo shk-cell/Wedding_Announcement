@@ -13,6 +13,13 @@
     font-style: normal;
     font-display: swap;
   }
+  @font-face {
+    font-family: 'BroadcastMatter';
+    src: url('Broadcast_Matter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
   :root {
     --cream: #fffefe;
@@ -39,7 +46,7 @@
   .hero-bg { position: absolute; inset: 0; background: linear-gradient(160deg, #fbeef1 0%, #ffffff 55%, #f8e8ec 100%); }
   .hero-content { position: relative; z-index: 2; text-align: center; animation: riseUp 1.4s cubic-bezier(.22,1,.36,1) forwards; opacity: 0; transform: translateY(30px); }
   .invitation-label { font-family: 'Hakgyoansim', 'Noto Serif KR', serif; font-style: italic; font-size: 14px; letter-spacing: 4px; color: var(--dusty-rose); text-transform: uppercase; margin-bottom: 28px; }
-  .names { font-family: 'Hakgyoansim', serif; font-size: clamp(46px, 12vw, 68px); font-weight: 300; line-height: 1.1; color: var(--deep-rose); letter-spacing: -1px; }
+  .names { font-family: 'BroadcastMatter', serif; font-size: clamp(46px, 12vw, 68px); font-weight: 300; line-height: 1.1; color: var(--deep-rose); letter-spacing: -1px; }
   .names .ampersand { display: block; font-style: italic; font-size: 0.6em; color: var(--dusty-rose); margin: 4px 0; }
   .hero-couple { position: relative; z-index: 2; width: 100%; max-width: 280px; margin-top: 18px; }
   .hero-couple svg { width: 100%; height: auto; display: block; }
@@ -143,9 +150,9 @@
   <div class="hero-content">
     <p class="invitation-label">Wedding Announcement</p>
     <div class="names">
-      신홍규
+      Honggyu
       <span class="ampersand">&</span>
-      김서현
+      Seohyeon
     </div>
   </div>
   <div class="hero-couple">
