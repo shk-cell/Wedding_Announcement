@@ -250,8 +250,8 @@
   <div class="intro-card">
     <div class="intro-slider-wrap">
       <div class="intro-slides" id="bride-slides">
-        <div class="intro-slide active"><img src="image/1.png" alt="신부 1"></div>
-        <div class="intro-slide"><img src="image/김서현1.jpg" alt="신부 2"></div>
+        <div class="intro-slide active"><img src="image/김서현1.jpg" alt="신부 1"></div>
+        <div class="intro-slide"><img src="image/1.png" alt="신부 2"></div>
       </div>
       <button class="intro-btn prev" onclick="introSlide('bride',-1)">&#8249;</button>
       <button class="intro-btn next" onclick="introSlide('bride',1)">&#8250;</button>
@@ -433,7 +433,7 @@
     slideEls[cur].classList.remove('active');
     cur = (n + total) % total;
     slideEls[cur].classList.add('active');
-    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
+    dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
   function moveSlide(dir) { goTo(cur + dir); }
 
