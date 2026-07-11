@@ -74,9 +74,9 @@
   .gallery-section { border-top: 1px solid #ece3e5; }
   .slider-wrap { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 12px; overflow: hidden; background: #f2e1e5; touch-action: pan-y; }
   .slides { position: relative; width: 100%; height: 100%; }
-  .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
-  .slide.active { opacity: 1; pointer-events: auto; }
-  .slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .slide, .slide2 { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s ease; pointer-events: none; }
+  .slide.active, .slide2.active { opacity: 1; pointer-events: auto; }
+  .slide img, .slide2 img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; color: var(--text-light); font-size: 12px; letter-spacing: 1px; background: linear-gradient(135deg, #f8ebee, #efdce1); }
   .photo-placeholder .icon { font-size: 36px; opacity: 0.4; }
   .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.75); border: none; cursor: pointer; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); color: var(--deep-rose); font-size: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); transition: background 0.2s; }
@@ -103,13 +103,6 @@
   .intro-role { font-size: 12px; letter-spacing: 3px; color: var(--dusty-rose); text-transform: uppercase; margin-bottom: 6px; }
   .intro-name { font-size: 22px; color: var(--text); margin-bottom: 8px; }
   .intro-parents { font-size: 18px; color: var(--text-light); line-height: 1.7; word-break: keep-all; }
-
-  /* DAILY */
-  .daily-section { border-top: 1px solid #ece3e5; }
-  .daily-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .daily-thumb { aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; cursor: pointer; }
-  .daily-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
-  .daily-thumb:active img { opacity: 0.75; }
 
   /* FOOTER */
   footer { text-align: center; padding: 48px 28px 60px; border-top: 1px solid #ece3e5; }
@@ -291,20 +284,18 @@
   <div class="slider-dots" id="dots"></div>
 </section>
 
-<!-- DAILY -->
-<section class="daily-section fade-in">
-  <p class="section-label">일상 사진</p>
-  <div class="daily-grid">
-    <div class="daily-thumb" onclick="goTo(5); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
-      <img src="image/6.jpg" alt="일상 1">
+<!-- GALLERY2 -->
+<section class="gallery-section fade-in">
+  <div class="slider-wrap" id="slider2">
+    <div class="slides" id="slides2">
+      <div class="slide2"><img src="image/6.jpg" alt="Gallery 6"></div>
+      <div class="slide2"><img src="image/7.jpg" alt="Gallery 7"></div>
+      <div class="slide2"><img src="image/8.jpg" alt="Gallery 8"></div>
     </div>
-    <div class="daily-thumb" onclick="goTo(6); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
-      <img src="image/7.jpg" alt="일상 2">
-    </div>
-    <div class="daily-thumb" onclick="goTo(7); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
-      <img src="image/8.jpg" alt="일상 3">
-    </div>
+    <button class="slider-btn prev" onclick="moveSlide2(-1)">&#8249;</button>
+    <button class="slider-btn next" onclick="moveSlide2(1)">&#8250;</button>
   </div>
+  <div class="slider-dots" id="dots2"></div>
 </section>
 
 <!-- FOOTER -->
@@ -460,6 +451,33 @@
     dotsWrap.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
   function moveSlide(dir) { goTo(cur + dir); }
+
+  // 두번째 갤러리 슬라이더
+  let cur2 = 0;
+  const total2 = 3;
+  const slideEls2 = document.querySelectorAll('.slide2');
+  const dotsWrap2 = document.getElementById('dots2');
+  slideEls2[0].classList.add('active');
+  for (let i = 0; i < total2; i++) {
+    const d = document.createElement('div');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.onclick = () => goTo2(i);
+    dotsWrap2.appendChild(d);
+  }
+  function goTo2(n) {
+    slideEls2[cur2].classList.remove('active');
+    cur2 = (n + total2) % total2;
+    slideEls2[cur2].classList.add('active');
+    dotsWrap2.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur2));
+  }
+  function moveSlide2(dir) { goTo2(cur2 + dir); }
+  let startX2 = 0;
+  const wrap2 = document.getElementById('slider2');
+  wrap2.addEventListener('touchstart', e => { startX2 = e.touches[0].clientX; }, { passive: true });
+  wrap2.addEventListener('touchend', e => {
+    const diff = startX2 - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) moveSlide2(diff > 0 ? 1 : -1);
+  });
 
   // 신랑·신부 소개 슬라이더
   (function() {
