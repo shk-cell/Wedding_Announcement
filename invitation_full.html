@@ -389,14 +389,21 @@
     function tryPlay() {
       audio.play().then(() => { playing = true; btn.classList.remove('muted'); }).catch(() => {});
     }
-    // 페이지 로드 즉시 시도
-    tryPlay();
-    // 첫 터치/클릭 시 재생 (브라우저 정책 fallback)
-    ['touchstart', 'click'].forEach(evt => {
-      document.addEventListener(evt, function startOnce() {
-        if (!playing) tryPlay();
-        document.removeEventListener(evt, startOnce);
-      }, { once: true, passive: true });
+    // 음소거로 자동재생 후 즉시 해제 (브라우저 autoplay 정책 우회)
+    audio.muted = true;
+    audio.play().then(() => {
+      audio.muted = false;
+      playing = true;
+      btn.classList.remove('muted');
+    }).catch(() => {
+      audio.muted = false;
+      // fallback: 첫 터치/클릭 시 재생
+      ['touchstart', 'click'].forEach(evt => {
+        document.addEventListener(evt, function startOnce() {
+          if (!playing) tryPlay();
+          document.removeEventListener(evt, startOnce);
+        }, { once: true, passive: true });
+      });
     });
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
