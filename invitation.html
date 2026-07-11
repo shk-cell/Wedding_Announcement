@@ -122,6 +122,8 @@
   @keyframes heartPop { 0% { opacity: 0; transform: scale(0.3); } 70% { opacity: 1; transform: scale(1.15); } 100% { opacity: 1; transform: scale(1); } }
   .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s ease, transform 0.8s ease; }
   .fade-in.visible { opacity: 1; transform: none; }
+  #bgm-btn { transition: opacity 0.2s; }
+  #bgm-btn.muted { opacity: 0.35; text-decoration: line-through; }
 </style>
 </head>
 <body>
@@ -286,15 +288,20 @@
     const btn = document.getElementById('bgm-btn');
     let playing = false;
     function tryPlay() {
-      audio.play().then(() => { playing = true; btn.textContent = '♪'; }).catch(() => {});
+      audio.play().then(() => { playing = true; btn.classList.remove('muted'); }).catch(() => {});
     }
-    document.addEventListener('click', function startOnce() {
-      tryPlay();
-      document.removeEventListener('click', startOnce);
-    }, { once: true });
+    // 페이지 로드 즉시 시도
+    tryPlay();
+    // 첫 터치/클릭 시 재생 (브라우저 정책 fallback)
+    ['touchstart', 'click'].forEach(evt => {
+      document.addEventListener(evt, function startOnce() {
+        if (!playing) tryPlay();
+        document.removeEventListener(evt, startOnce);
+      }, { once: true, passive: true });
+    });
     btn.addEventListener('click', function(e) {
       e.stopPropagation();
-      if (playing) { audio.pause(); playing = false; btn.textContent = '♩'; }
+      if (playing) { audio.pause(); playing = false; btn.classList.add('muted'); }
       else { tryPlay(); }
     });
   })();
@@ -439,6 +446,7 @@
       document.querySelectorAll(`#${id}-dots .dot`).forEach((d, i) => d.classList.toggle('active', i === s.cur));
     }
   })();
+
 
   let startX = 0;
   const wrap = document.getElementById('slider');
