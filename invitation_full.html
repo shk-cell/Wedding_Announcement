@@ -89,10 +89,17 @@
 
   /* INTRO */
   .intro-section { border-top: 1px solid #ece3e5; }
-  .intro-cards { display: flex; gap: 24px; justify-content: center; }
-  .intro-card { flex: 1; max-width: 180px; text-align: center; }
-  .intro-img-wrap { width: 120px; height: 120px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; border: 2px solid var(--blush); }
-  .intro-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .intro-card { max-width: 320px; margin: 0 auto 48px; text-align: center; }
+  .intro-card:last-child { margin-bottom: 0; }
+  .intro-slider-wrap { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 16px; overflow: hidden; background: #f2e1e5; margin-bottom: 20px; }
+  .intro-slides { position: relative; width: 100%; height: 100%; }
+  .intro-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s ease; }
+  .intro-slide.active { opacity: 1; }
+  .intro-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .intro-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.75); border: none; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); color: var(--deep-rose); font-size: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.12); }
+  .intro-btn.prev { left: 10px; }
+  .intro-btn.next { right: 10px; }
+  .intro-dots { display: flex; justify-content: center; gap: 7px; margin-bottom: 16px; }
   .intro-role { font-size: 12px; letter-spacing: 3px; color: var(--dusty-rose); text-transform: uppercase; margin-bottom: 6px; }
   .intro-name { font-size: 22px; color: var(--text); margin-bottom: 8px; }
   .intro-parents { font-size: 14px; color: var(--text-light); line-height: 1.7; word-break: keep-all; }
@@ -153,6 +160,9 @@
 
 
 <canvas id="petalCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+
+<audio id="bgm" src="bgm.MP3" loop preload="auto"></audio>
+<button id="bgm-btn" style="position:fixed;bottom:24px;right:20px;z-index:10000;background:rgba(255,255,255,0.85);border:none;border-radius:50%;width:44px;height:44px;font-size:20px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.15);backdrop-filter:blur(6px);" title="음악 켜기/끄기">♪</button>
 
 <!-- HERO -->
 <div class="hero">
@@ -243,23 +253,33 @@
 
 <!-- INTRO -->
 <section class="intro-section fade-in">
-  <div class="intro-cards">
-    <div class="intro-card">
-      <div class="intro-img-wrap">
-        <img src="image/1.png" alt="신랑">
+  <div class="intro-card">
+    <div class="intro-slider-wrap">
+      <div class="intro-slides" id="groom-slides">
+        <div class="intro-slide active"><img src="image/1.png" alt="신랑 1"></div>
+        <div class="intro-slide"><img src="image/1.png" alt="신랑 2"></div>
       </div>
-      <p class="intro-role">신랑</p>
-      <p class="intro-name">신홍규</p>
-      <p class="intro-parents">신희태 · 조미애의<br>차남</p>
+      <button class="intro-btn prev" onclick="introSlide('groom',-1)">&#8249;</button>
+      <button class="intro-btn next" onclick="introSlide('groom',1)">&#8250;</button>
     </div>
-    <div class="intro-card">
-      <div class="intro-img-wrap">
-        <img src="image/1.png" alt="신부">
+    <div class="intro-dots" id="groom-dots"></div>
+    <p class="intro-role">신랑</p>
+    <p class="intro-name">신홍규</p>
+    <p class="intro-parents">신희태 · 조미애 의<br>2남 중 차남</p>
+  </div>
+  <div class="intro-card">
+    <div class="intro-slider-wrap">
+      <div class="intro-slides" id="bride-slides">
+        <div class="intro-slide active"><img src="image/1.png" alt="신부 1"></div>
+        <div class="intro-slide"><img src="image/1.png" alt="신부 2"></div>
       </div>
-      <p class="intro-role">신부</p>
-      <p class="intro-name">김서현</p>
-      <p class="intro-parents">김용안 · 김옥의<br>장녀</p>
+      <button class="intro-btn prev" onclick="introSlide('bride',-1)">&#8249;</button>
+      <button class="intro-btn next" onclick="introSlide('bride',1)">&#8250;</button>
     </div>
+    <div class="intro-dots" id="bride-dots"></div>
+    <p class="intro-role">신부</p>
+    <p class="intro-name">김서현</p>
+    <p class="intro-parents">김용안 · 김옥 의<br>2남 1녀 중 장녀</p>
   </div>
 </section>
 
@@ -358,6 +378,25 @@
 
 <script>
 
+
+  // BGM
+  (function() {
+    const audio = document.getElementById('bgm');
+    const btn = document.getElementById('bgm-btn');
+    let playing = false;
+    function tryPlay() {
+      audio.play().then(() => { playing = true; btn.textContent = '♪'; }).catch(() => {});
+    }
+    document.addEventListener('click', function startOnce() {
+      tryPlay();
+      document.removeEventListener('click', startOnce);
+    }, { once: true });
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      if (playing) { audio.pause(); playing = false; btn.textContent = '♩'; }
+      else { tryPlay(); }
+    });
+  })();
 
   // 벚꽃 캔버스
   (function() {
@@ -474,6 +513,34 @@
     document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === cur));
   }
   function moveSlide(dir) { goTo(cur + dir); }
+
+  // 신랑·신부 소개 슬라이더
+  (function() {
+    const sliders = {
+      groom: { cur: 0, total: 2 },
+      bride:  { cur: 0, total: 2 }
+    };
+    Object.keys(sliders).forEach(id => {
+      const s = sliders[id];
+      s.slides = document.querySelectorAll(`#${id}-slides .intro-slide`);
+      const dotsWrap = document.getElementById(`${id}-dots`);
+      for (let i = 0; i < s.total; i++) {
+        const d = document.createElement('div');
+        d.className = 'dot' + (i === 0 ? ' active' : '');
+        d.onclick = () => introGoTo(id, i);
+        dotsWrap.appendChild(d);
+      }
+    });
+    window.introSlide = function(id, dir) { introGoTo(id, sliders[id].cur + dir); };
+    function introGoTo(id, n) {
+      const s = sliders[id];
+      s.slides[s.cur].classList.remove('active');
+      s.cur = (n + s.total) % s.total;
+      s.slides[s.cur].classList.add('active');
+      document.querySelectorAll(`#${id}-dots .dot`).forEach((d, i) => d.classList.toggle('active', i === s.cur));
+    }
+  })();
+
   let startX = 0;
   const wrap = document.getElementById('slider');
   wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
