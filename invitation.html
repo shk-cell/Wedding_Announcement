@@ -220,7 +220,6 @@
       <div class="slide"><img src="image/결혼4.jpg" alt="Gallery 4"></div>
       <div class="slide"><img src="image/결혼5.jpg" alt="Gallery 5"></div>
       <div class="slide"><img src="image/결혼6.jpg" alt="Gallery 6"></div>
-      <div class="slide"><img src="image/결혼7.jpg" alt="Gallery 7"></div>
     </div>
     <button class="slider-btn prev" onclick="moveSlide(-1)">&#8249;</button>
     <button class="slider-btn next" onclick="moveSlide(1)">&#8250;</button>
@@ -381,7 +380,7 @@
   document.addEventListener('dragstart', e => e.preventDefault());
 
   let cur = 0;
-  const total = 7;
+  const total = 6;
   const slideEls = document.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('dots');
   slideEls[0].classList.add('active');
