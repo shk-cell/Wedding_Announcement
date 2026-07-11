@@ -197,7 +197,7 @@
 
 <!-- COUPLE -->
 <div class="hero-couple fade-in" style="display:flex;justify-content:center;padding:0 0 48px;max-width:480px;margin:0 auto;">
-  <img src="image/10.png" alt="couple" style="width:100%;max-width:280px;display:block;">
+  <img src="image/일러스트.png" alt="couple" style="width:100%;max-width:280px;display:block;">
 </div>
 
 <!-- INTRO -->
@@ -207,6 +207,7 @@
       <div class="intro-slides" id="groom-slides">
         <div class="intro-slide active"><img src="image/신홍규1.jpg" alt="신랑 1"></div>
         <div class="intro-slide"><img src="image/신홍규2.jpg" alt="신랑 2"></div>
+        <div class="intro-slide"><img src="image/신홍규3.jpg" alt="신랑 3"></div>
       </div>
       <button class="intro-btn prev" onclick="introSlide('groom',-1)">&#8249;</button>
       <button class="intro-btn next" onclick="introSlide('groom',1)">&#8250;</button>
@@ -221,6 +222,7 @@
       <div class="intro-slides" id="bride-slides">
         <div class="intro-slide active"><img src="image/김서현1.jpg" alt="신부 1"></div>
         <div class="intro-slide"><img src="image/김서현2.jpg" alt="신부 2"></div>
+        <div class="intro-slide"><img src="image/김서현3.jpg" alt="신부 3"></div>
       </div>
       <button class="intro-btn prev" onclick="introSlide('bride',-1)">&#8249;</button>
       <button class="intro-btn next" onclick="introSlide('bride',1)">&#8250;</button>
@@ -237,11 +239,13 @@
   <p class="section-label">Gallery</p>
   <div class="slider-wrap" id="slider">
     <div class="slides" id="slides">
-      <div class="slide"><img src="image/1.jpg" alt="Gallery 1"></div>
-      <div class="slide"><img src="image/2.jpg" alt="Gallery 2"></div>
-      <div class="slide"><img src="image/3.jpg" alt="Gallery 3"></div>
-      <div class="slide"><img src="image/4.jpg" alt="Gallery 4"></div>
-      <div class="slide"><img src="image/5.jpg" alt="Gallery 5"></div>
+      <div class="slide active"><img src="image/결혼1.jpg" alt="Gallery 1"></div>
+      <div class="slide"><img src="image/결혼2.jpg" alt="Gallery 2"></div>
+      <div class="slide"><img src="image/결혼3.jpg" alt="Gallery 3"></div>
+      <div class="slide"><img src="image/결혼4.jpg" alt="Gallery 4"></div>
+      <div class="slide"><img src="image/결혼5.jpg" alt="Gallery 5"></div>
+      <div class="slide"><img src="image/결혼6.jpg" alt="Gallery 6"></div>
+      <div class="slide"><img src="image/결혼7.jpg" alt="Gallery 7"></div>
     </div>
     <button class="slider-btn prev" onclick="moveSlide(-1)">&#8249;</button>
     <button class="slider-btn next" onclick="moveSlide(1)">&#8250;</button>
@@ -253,10 +257,11 @@
 <section class="gallery-section fade-in" style="border-top:none;">
   <div class="slider-wrap" id="slider2">
     <div class="slides" id="slides2">
-      <div class="slide2"><img src="image/6.jpg" alt="Gallery 6"></div>
-      <div class="slide2"><img src="image/7.jpg" alt="Gallery 7"></div>
-      <div class="slide2"><img src="image/8.jpg" alt="Gallery 8"></div>
-      <div class="slide2"><img src="image/9.jpg" alt="Gallery 9"></div>
+      <div class="slide2 active"><img src="image/일상1.jpg" alt="Gallery 일상1"></div>
+      <div class="slide2"><img src="image/일상2.jpg" alt="Gallery 일상2"></div>
+      <div class="slide2"><img src="image/일상3.jpg" alt="Gallery 일상3"></div>
+      <div class="slide2"><img src="image/일상4.jpg" alt="Gallery 일상4"></div>
+      <div class="slide2"><img src="image/일상5.jpg" alt="Gallery 일상5"></div>
     </div>
     <button class="slider-btn prev" onclick="moveSlide2(-1)">&#8249;</button>
     <button class="slider-btn next" onclick="moveSlide2(1)">&#8250;</button>
@@ -470,7 +475,7 @@
   document.addEventListener('dragstart', e => e.preventDefault());
 
   let cur = 0;
-  const total = 5;
+  const total = 7;
   const slideEls = document.querySelectorAll('.slide');
   const dotsWrap = document.getElementById('dots');
   slideEls[0].classList.add('active');
@@ -490,7 +495,7 @@
 
   // 두번째 갤러리 슬라이더
   let cur2 = 0;
-  const total2 = 4;
+  const total2 = 5;
   const slideEls2 = document.querySelectorAll('.slide2');
   const dotsWrap2 = document.getElementById('dots2');
   slideEls2[0].classList.add('active');
@@ -518,8 +523,8 @@
   // 신랑·신부 소개 슬라이더
   (function() {
     const sliders = {
-      groom: { cur: 0, total: 2 },
-      bride:  { cur: 0, total: 2 }
+      groom: { cur: 0, total: 3 },
+      bride:  { cur: 0, total: 3 }
     };
     Object.keys(sliders).forEach(id => {
       const s = sliders[id];
