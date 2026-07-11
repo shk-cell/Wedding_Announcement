@@ -7,6 +7,7 @@
 <meta property="og:title" content="결혼 소식 - 신홍규 ♥ 김서현">
 <meta property="og:description" content="저희 두 사람이 부부로서 새로운 출발을 하게 되었습니다.">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://shk-cell.github.io/Wedding_Announcement/image/%EC%86%90.png">
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
 <style>
   @font-face {
@@ -106,6 +107,13 @@
   .intro-role { font-size: 12px; letter-spacing: 3px; color: var(--dusty-rose); text-transform: uppercase; margin-bottom: 6px; }
   .intro-name { font-size: 22px; color: var(--text); margin-bottom: 8px; }
   .intro-parents { font-size: 18px; color: var(--text-light); line-height: 1.7; word-break: keep-all; }
+
+  /* DAILY */
+  .daily-section { border-top: 1px solid #ece3e5; }
+  .daily-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .daily-thumb { aspect-ratio: 1/1; border-radius: 10px; overflow: hidden; cursor: pointer; }
+  .daily-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.2s; }
+  .daily-thumb:active img { opacity: 0.75; }
 
   /* CONTACT (공유: 계좌 섹션 아코디언에서도 사용) */
   .contact-group { background: white; border-radius: 16px; overflow: hidden; box-shadow: 0 2px 16px rgba(184,103,122,0.10); margin-bottom: 14px; }
@@ -371,6 +379,22 @@
         </div>
         <button class="copy-btn-sm" onclick="copyAccount(this, '하나은행 000-000000-00000 ○○○')">복사</button>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY -->
+<section class="daily-section fade-in">
+  <p class="section-label">일상 사진</p>
+  <div class="daily-grid">
+    <div class="daily-thumb" onclick="goTo(5); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
+      <img src="image/6.jpg" alt="일상 1">
+    </div>
+    <div class="daily-thumb" onclick="goTo(6); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
+      <img src="image/7.jpg" alt="일상 2">
+    </div>
+    <div class="daily-thumb" onclick="goTo(7); document.getElementById('slider').scrollIntoView({behavior:'smooth'})">
+      <img src="image/8.jpg" alt="일상 3">
     </div>
   </div>
 </section>
