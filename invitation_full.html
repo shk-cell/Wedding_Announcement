@@ -83,13 +83,12 @@
   .slide img, .slide2 img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; color: var(--text-light); font-size: 12px; letter-spacing: 1px; background: linear-gradient(135deg, #f8ebee, #efdce1); }
   .photo-placeholder .icon { font-size: 36px; opacity: 0.4; }
-  .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.95); border: none; cursor: pointer; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); color: var(--deep-rose); font-size: 24px; box-shadow: 0 3px 14px rgba(0,0,0,0.22); transition: background 0.2s; }
-  .slider-btn:hover { background: rgba(255,255,255,0.95); }
-  .slider-btn.prev { left: 12px; }
-  .slider-btn.next { right: 12px; }
+  .slider-btn { background: rgba(255,255,255,0.95); border: none; cursor: pointer; width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--deep-rose); font-size: 24px; box-shadow: 0 3px 14px rgba(0,0,0,0.22); transition: background 0.2s; flex-shrink: 0; }
+  .slider-btn:hover { background: #f5e4e8; }
+  .slider-nav { display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 12px; }
   .slider-dots { display: flex; justify-content: center; gap: 7px; margin-top: 16px; }
   .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--blush); transition: background 0.3s, transform 0.3s; cursor: pointer; }
-  .slider-counter { text-align: center; margin-top: 10px; font-size: 13px; color: var(--text-light); letter-spacing: 2px; }
+  .slider-counter { font-size: 13px; color: var(--text-light); letter-spacing: 2px; min-width: 48px; text-align: center; }
   .dot.active { background: var(--dusty-rose); transform: scale(1.3); }
 
   /* INTRO */
@@ -101,9 +100,7 @@
   .intro-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.45s ease; }
   .intro-slide.active { opacity: 1; }
   .intro-slide img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-  .intro-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(255,255,255,0.95); border: none; cursor: pointer; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; backdrop-filter: blur(4px); color: var(--deep-rose); font-size: 22px; box-shadow: 0 3px 14px rgba(0,0,0,0.22); }
-  .intro-btn.prev { left: 10px; }
-  .intro-btn.next { right: 10px; }
+  .intro-btn { background: rgba(255,255,255,0.95); border: none; cursor: pointer; width: 48px; height: 48px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--deep-rose); font-size: 22px; box-shadow: 0 3px 14px rgba(0,0,0,0.22); flex-shrink: 0; }
   .intro-dots { display: flex; justify-content: center; gap: 7px; margin-bottom: 16px; }
   .intro-role { font-size: 12px; letter-spacing: 3px; color: var(--dusty-rose); text-transform: uppercase; margin-bottom: 6px; }
   .intro-name { font-size: 22px; color: var(--text); margin-bottom: 8px; }
@@ -210,11 +207,13 @@
         <div class="intro-slide"><img src="image/신홍규2.jpg" alt="신랑 2"></div>
         <div class="intro-slide"><img src="image/신홍규3.jpg" alt="신랑 3"></div>
       </div>
-      <button class="intro-btn prev" onclick="introSlide('groom',-1)">&#8249;</button>
-      <button class="intro-btn next" onclick="introSlide('groom',1)">&#8250;</button>
     </div>
     <div class="intro-dots" id="groom-dots"></div>
-    <p class="slider-counter" id="groom-counter">1 / 3</p>
+    <div class="slider-nav">
+      <button class="intro-btn prev" onclick="introSlide('groom',-1)">&#8249;</button>
+      <p class="slider-counter" id="groom-counter">1 / 3</p>
+      <button class="intro-btn next" onclick="introSlide('groom',1)">&#8250;</button>
+    </div>
     <p class="intro-role" style="color:#5b8fc6;">신랑</p>
     <p class="intro-name">신홍규</p>
     <p class="intro-parents">신희태 · 조미애 의<br>2남 중 차남</p>
@@ -226,11 +225,13 @@
         <div class="intro-slide"><img src="image/김서현2.jpg" alt="신부 2"></div>
         <div class="intro-slide"><img src="image/김서현3.jpg" alt="신부 3"></div>
       </div>
-      <button class="intro-btn prev" onclick="introSlide('bride',-1)">&#8249;</button>
-      <button class="intro-btn next" onclick="introSlide('bride',1)">&#8250;</button>
     </div>
     <div class="intro-dots" id="bride-dots"></div>
-    <p class="slider-counter" id="bride-counter">1 / 3</p>
+    <div class="slider-nav">
+      <button class="intro-btn prev" onclick="introSlide('bride',-1)">&#8249;</button>
+      <p class="slider-counter" id="bride-counter">1 / 3</p>
+      <button class="intro-btn next" onclick="introSlide('bride',1)">&#8250;</button>
+    </div>
     <p class="intro-role">신부</p>
     <p class="intro-name">김서현</p>
     <p class="intro-parents">김용안 · 김옥 의<br>2남 1녀 중 장녀</p>
@@ -249,11 +250,13 @@
       <div class="slide"><img src="image/결혼5.jpg" alt="Gallery 5"></div>
       <div class="slide"><img src="image/결혼6.jpg" alt="Gallery 6"></div>
     </div>
-    <button class="slider-btn prev" onclick="moveSlide(-1)">&#8249;</button>
-    <button class="slider-btn next" onclick="moveSlide(1)">&#8250;</button>
   </div>
   <div class="slider-dots" id="dots"></div>
-  <p class="slider-counter" id="counter1">1 / 6</p>
+  <div class="slider-nav">
+    <button class="slider-btn prev" onclick="moveSlide(-1)">&#8249;</button>
+    <p class="slider-counter" id="counter1">1 / 6</p>
+    <button class="slider-btn next" onclick="moveSlide(1)">&#8250;</button>
+  </div>
 </section>
 
 <!-- GALLERY2 -->
@@ -267,11 +270,13 @@
       <div class="slide2"><img src="image/일상5.jpg" alt="Gallery 일상5"></div>
       <div class="slide2"><img src="image/일상6.jpg" alt="Gallery 일상6"></div>
     </div>
-    <button class="slider-btn prev" onclick="moveSlide2(-1)">&#8249;</button>
-    <button class="slider-btn next" onclick="moveSlide2(1)">&#8250;</button>
   </div>
   <div class="slider-dots" id="dots2"></div>
-  <p class="slider-counter" id="counter2">1 / 6</p>
+  <div class="slider-nav">
+    <button class="slider-btn prev" onclick="moveSlide2(-1)">&#8249;</button>
+    <p class="slider-counter" id="counter2">1 / 6</p>
+    <button class="slider-btn next" onclick="moveSlide2(1)">&#8250;</button>
+  </div>
 </section>
 
 <!-- ACCOUNT -->
