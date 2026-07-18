@@ -425,13 +425,6 @@
     document.getElementById('counter2').textContent = (cur2 + 1) + ' / ' + total2;
   }
   function moveSlide2(dir) { goTo2(cur2 + dir); }
-  let startX2 = 0;
-  const wrap2 = document.getElementById('slider2');
-  wrap2.addEventListener('touchstart', e => { startX2 = e.touches[0].clientX; }, { passive: true });
-  wrap2.addEventListener('touchend', e => {
-    const diff = startX2 - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) moveSlide2(diff > 0 ? 1 : -1);
-  });
 
   // 신랑·신부 소개 슬라이더
   (function() {
@@ -462,13 +455,6 @@
   })();
 
 
-  let startX = 0;
-  const wrap = document.getElementById('slider');
-  wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-  wrap.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) moveSlide(diff > 0 ? 1 : -1);
-  });
 </script>
 </body>
 </html>
